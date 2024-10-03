@@ -59,8 +59,9 @@ public class NetworkPlayer : MonoBehaviour
 
         if(inputMagnitued != 0){
             Quaternion desiredDirection = Quaternion.LookRotation(new Vector3(moveInput.x, 0, moveInput.y * -1), transform.up);
+            
             mainJoint.targetRotation = Quaternion.RotateTowards(mainJoint.targetRotation, desiredDirection, Time.fixedDeltaTime * 300);
-
+            
             if(localForwardSpeed < maxSpeed){
                 rigidBody.AddForce(-transform.right * inputMagnitued * 30);
             }
