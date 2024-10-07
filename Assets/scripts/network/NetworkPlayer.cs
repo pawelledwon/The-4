@@ -49,8 +49,8 @@ public class NetworkPlayer : MonoBehaviour
             }
         }
 
-        if(!isGrounded){
-            rigidBody.AddForce(Vector3.down * 10);
+        if(!isGrounded && jumpButtonPressed){
+            rigidBody.AddForce(Vector3.down * 20);
         }
 
         float inputMagnitued = moveInput.magnitude;
