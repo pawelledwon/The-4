@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SyncPhysicsWithJoint : MonoBehaviour
 {
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody;
     ConfigurableJoint joint;
 
     [SerializeField]
