@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1271,18 +1271,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 157007288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1655577518b702c488f7123878c8814f, type: 3}
+  m_Script: {fileID: 11500000, guid: 74930e91665948b48b37e457feb8c52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHand: {fileID: 284632819}
-  rightHand: {fileID: 998857396}
-  animator: {fileID: 1348369586}
-  layerName: PickUp
-  handsJoints:
-  - {fileID: 1384473238}
-  - {fileID: 2114407173}
-  - {fileID: 1800285818}
-  - {fileID: 1890285930}
+  pickUpObject: {fileID: 1348369587}
 --- !u!1 &159836115 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8193846485444901470, guid: bb7ec37fa0a8a1541aafd69633b24acd, type: 3}
@@ -2219,11 +2211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatedRigidBody: {fileID: 697009999}
   syncAnimation: 1
---- !u!1 &284632819 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7010756289830963309, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
-  m_PrefabInstance: {fileID: 2016555205}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &292579609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2790,7 +2777,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -5265,11 +5252,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &998857396 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9019963459409213586, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
-  m_PrefabInstance: {fileID: 2016555205}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1022207524 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2824864488711516660, guid: 4c0fd9c184f267e43a260d2f78072cfb, type: 3}
@@ -6494,6 +6476,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1348369587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348369584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1655577518b702c488f7123878c8814f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHand: {fileID: 2114407171}
+  rightHand: {fileID: 1890285928}
+  animator: {fileID: 1348369586}
+  layerName: PickUp
+  handsJoints:
+  - {fileID: 1384473238}
+  - {fileID: 2114407173}
+  - {fileID: 1800285818}
+  - {fileID: 1890285930}
 --- !u!1001 &1364330490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8226,6 +8229,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1348369586}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1348369587}
     - targetCorrespondingSourceObject: {fileID: 6905609870639353253, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 446066013}
@@ -10159,7 +10165,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.051, z: 2.171}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -10210,7 +10216,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 20, y: 20, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1954783259 stripped
 GameObject:

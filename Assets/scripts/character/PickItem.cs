@@ -39,43 +39,27 @@ public class PickUpObject : MonoBehaviour
         {
             if (Input.GetKeyDown("e"))  
             {
-                
                 animatePickUp();
-
-                hasItem = true;
-
-                objectToPickUp.GetComponent<Rigidbody>().isKinematic = true;
-
-                Vector3 pickeObjectPosition = calculateTargetPosition();
-
-                objectToPickUp.transform.position = pickeObjectPosition;
-                objectToPickUp.transform.parent = leftHand.transform;
-                objectToPickUp.GetComponent<Collider>().enabled = false;
             }
         }
 
         if (Input.GetKeyDown("q") && hasItem == true) 
         {
-            objectToPickUp.GetComponent<Rigidbody>().isKinematic = false; 
-            objectToPickUp.transform.parent = null;
-            objectToPickUp.GetComponent<Collider>().enabled = true;
-
-            hasItem = false;
-
             disableAnimatePickUp();
+            changeObjPosToDropped();
         }
     }
-    private void OnTriggerEnter(Collider other) 
+
+    public void OnObjectInRange(GameObject obj)
     {
-        if (other.gameObject.tag == "Object") 
-        {
-            pickUpPossible = true;  
-            objectToPickUp = other.gameObject; 
-        }
+        pickUpPossible = true;
+        objectToPickUp = obj;
     }
-    private void OnTriggerExit(Collider other)
+
+    public void OnObjectOutOfRange()
     {
         pickUpPossible = false;
+        objectToPickUp = null;
     }
 
     private Vector3 calculateTargetPosition()
@@ -117,5 +101,27 @@ public class PickUpObject : MonoBehaviour
 
         animator.SetBool("pickUp", false);
         animator.SetLayerWeight(animator.GetLayerIndex(layerName), 0);
+    }
+
+    public void changeObjPosToPicked()
+    {
+        hasItem = true;
+
+        objectToPickUp.GetComponent<Rigidbody>().isKinematic = true;
+
+        Vector3 pickeObjectPosition = calculateTargetPosition();
+
+        objectToPickUp.transform.position = pickeObjectPosition;
+        objectToPickUp.transform.parent = leftHand.transform;
+        objectToPickUp.GetComponent<Collider>().enabled = false;
+    }
+
+    public void changeObjPosToDropped()
+    {
+        objectToPickUp.GetComponent<Rigidbody>().isKinematic = false; 
+        objectToPickUp.transform.parent = null;
+        objectToPickUp.GetComponent<Collider>().enabled = true;
+
+        hasItem = false;
     }
 }
