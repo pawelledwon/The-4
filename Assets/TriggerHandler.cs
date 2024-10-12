@@ -8,7 +8,7 @@ public class TriggerHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Object" && pickUpObject != null)
+        if (other.gameObject.tag == "PickUpObject" && pickUpObject != null)
         {
             pickUpObject.OnObjectInRange(other.gameObject);
         }
@@ -16,9 +16,9 @@ public class TriggerHandler : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Object" && pickUpObject != null)
+        if (other.gameObject.tag == "PickUpObject" && pickUpObject != null)
         {
-            pickUpObject.OnObjectOutOfRange();
+            pickUpObject.OnObjectOutOfRange(other.gameObject);
         }
     }
 }
