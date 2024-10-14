@@ -10,7 +10,7 @@ public class TriggerHandler : MonoBehaviour
     {
         if (other.gameObject.tag == "PickUpObject" && pickUpObject != null)
         {
-            pickUpObject.OnObjectInRange(other.gameObject);
+            pickUpObject.onObjectInRange(other.gameObject);
         }
     }
 
@@ -18,7 +18,7 @@ public class TriggerHandler : MonoBehaviour
     {
         if (other.gameObject.tag == "PickUpObject" && pickUpObject != null)
         {
-            pickUpObject.OnObjectOutOfRange(other.gameObject);
+            pickUpObject.onObjectOutOfRange(other.gameObject);
         }
     }
 }

@@ -6491,13 +6491,15 @@ MonoBehaviour:
   leftHand: {fileID: 649010759}
   rightHand: {fileID: 658864002}
   animator: {fileID: 1348369586}
-  layerName: PickUp
+  pickUpLayerName: PickUp
+  dragLayerName: Drag
   handsJoints:
   - {fileID: 1384473238}
   - {fileID: 2114407173}
   - {fileID: 1800285818}
   - {fileID: 1890285930}
-  additionalDistance: 1.2
+  additionalPickUpDistance: 0.5
+  additionalDragDistance: 1.5
   maxCarryMass: 10
   maxCarrySize: 1.2
 --- !u!1001 &1364330490
@@ -8091,15 +8093,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -9206655195127846874, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000020131187
+      value: -0.000019995297
       objectReference: {fileID: 0}
     - target: {fileID: -9206655195127846874, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.014340546
+      value: 0.0143413
       objectReference: {fileID: 0}
     - target: {fileID: -9206655195127846874, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0068034744
+      value: -0.006803752
       objectReference: {fileID: 0}
     - target: {fileID: -9206655195127846874, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8171,15 +8173,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7454510133298760615, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00000017054846
+      value: -0.00000015541447
       objectReference: {fileID: 0}
     - target: {fileID: -7454510133298760615, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0071083494
+      value: 0.007108431
       objectReference: {fileID: 0}
     - target: {fileID: -7454510133298760615, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.00000038533477
+      value: -0.0000010316145
       objectReference: {fileID: 0}
     - target: {fileID: -4819223349682164798, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_IsActive
@@ -8231,27 +8233,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1401557881877447258, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00003573905
+      value: -0.000035585315
       objectReference: {fileID: 0}
     - target: {fileID: 1401557881877447258, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.014350288
+      value: 0.014350813
       objectReference: {fileID: 0}
     - target: {fileID: 1401557881877447258, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0068151294
+      value: 0.0068153394
       objectReference: {fileID: 0}
     - target: {fileID: 2198142483762769286, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0000002864399
+      value: -0.000001752458
       objectReference: {fileID: 0}
     - target: {fileID: 2198142483762769286, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0071079982
+      value: 0.0071092756
       objectReference: {fileID: 0}
     - target: {fileID: 2198142483762769286, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00000044796622
+      value: 0.0000037963623
       objectReference: {fileID: 0}
     - target: {fileID: 6829485909940997511, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_IsActive
@@ -10359,7 +10361,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.051, z: 5.61}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -10410,7 +10412,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1954783259 stripped
 GameObject:

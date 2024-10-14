@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading;
+using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,13 +19,19 @@ public class PickUpObject : MonoBehaviour
     private Animator animator;
 
     [SerializeField]
-    string layerName = "PickUp";
+    private string pickUpLayerName = "PickUp";
+
+    [SerializeField]
+    private string dragLayerName = "Drag";
 
     [SerializeField]
     private List<ConfigurableJoint> handsJoints;
 
     [SerializeField]
-    private float additionalDistance = 0.5f;
+    private float additionalPickUpDistance = 0.5f;
+
+    [SerializeField]
+    private float additionalDragDistance = 1.0f;
 
     [SerializeField]
     private float maxCarryMass = 10f;
@@ -47,14 +54,13 @@ public class PickUpObject : MonoBehaviour
 
     void Update()
     {
-        print(possibleObjectsToPickUp.Count);
         if(possibleObjectsToPickUp.Count > 0) 
         {
             pickUpPossible = true;
 
             if (!hasItem)
             {
-                objectToPickUp = GetObjectInSight();
+                objectToPickUp = getObjectInSight();
                 decidePickUpOrDrag();
             }
             
@@ -73,7 +79,7 @@ public class PickUpObject : MonoBehaviour
 
                 if (isDragging)
                 {
-                    StartDragging();
+                    animateDragging();
                 }
                 else
                 {
@@ -86,7 +92,8 @@ public class PickUpObject : MonoBehaviour
         {
             if (isDragging)
             {
-                StopDragging();
+                disableAnimateDragging();
+                stopDragging();
             }
             else
             {
@@ -96,7 +103,7 @@ public class PickUpObject : MonoBehaviour
         }
     }
 
-    public void OnObjectInRange(GameObject obj)
+    public void onObjectInRange(GameObject obj)
     {
         if (obj.CompareTag("PickUpObject")) // Assuming objects have a tag "PickUpObject"
         {
@@ -119,7 +126,7 @@ public class PickUpObject : MonoBehaviour
         }
     }
 
-    public void OnObjectOutOfRange(GameObject obj)
+    public void onObjectOutOfRange(GameObject obj)
     {
         if (obj.CompareTag("PickUpObject"))
         {
@@ -127,7 +134,7 @@ public class PickUpObject : MonoBehaviour
         }
     }
 
-    private GameObject GetObjectInSight()
+    private GameObject getObjectInSight()
     {
         GameObject closestObject = null;
         float maxDotProduct = -1f; 
@@ -162,36 +169,8 @@ public class PickUpObject : MonoBehaviour
         Vector3 direction = (midpoint - playerPosition);
         direction.y = 0;
 
-        Vector3 extendedPosition = midpoint + direction * additionalDistance;
+        Vector3 extendedPosition = midpoint + direction * additionalPickUpDistance;
         return extendedPosition;
-    }
-
-    private void animatePickUp()
-    {
-        foreach (var joint in handsJoints)
-        {
-            JointDrive slerpDrive = joint.slerpDrive;
-            slerpDrive.positionSpring = 8;
-
-            joint.slerpDrive = slerpDrive;
-        }
-
-        animator.SetBool("pickUp", true);
-        animator.SetLayerWeight(animator.GetLayerIndex(layerName), 1);
-    }
-
-    private void disableAnimatePickUp()
-    {
-        foreach (var joint in handsJoints)
-        {
-            JointDrive slerpDrive = joint.slerpDrive;
-            slerpDrive.positionSpring = 1;
-
-            joint.slerpDrive = slerpDrive;
-        }
-
-        animator.SetBool("pickUp", false);
-        animator.SetLayerWeight(animator.GetLayerIndex(layerName), 0);
     }
 
     public void changeObjPosToPicked()
@@ -217,30 +196,89 @@ public class PickUpObject : MonoBehaviour
         hasItem = false;
     }
 
+    private void animatePickUp()
+    {
+        foreach (var joint in handsJoints)
+        {
+            JointDrive slerpDrive = joint.slerpDrive;
+            slerpDrive.positionSpring = 8;
+
+            joint.slerpDrive = slerpDrive;
+        }
+
+        animator.SetBool("pickUp", true);
+        animator.SetLayerWeight(animator.GetLayerIndex(pickUpLayerName), 1);
+    }
+
+    private void disableAnimatePickUp()
+    {
+        foreach (var joint in handsJoints)
+        {
+            JointDrive slerpDrive = joint.slerpDrive;
+            slerpDrive.positionSpring = 1;
+
+            joint.slerpDrive = slerpDrive;
+        }
+
+        animator.SetBool("pickUp", false);
+        animator.SetLayerWeight(animator.GetLayerIndex(pickUpLayerName), 0);
+    }
+
+    private void animateDragging()
+    {
+        foreach (var joint in handsJoints)
+        {
+            JointDrive slerpDrive = joint.slerpDrive;
+            slerpDrive.positionSpring = 8;
+
+            joint.slerpDrive = slerpDrive;
+        }
+        print("essa");
+        animator.SetBool("drag", true);
+        animator.SetLayerWeight(animator.GetLayerIndex(dragLayerName), 1);
+    }
+
+    private void disableAnimateDragging()
+    {
+        foreach (var joint in handsJoints)
+        {
+            JointDrive slerpDrive = joint.slerpDrive;
+            slerpDrive.positionSpring = 1;
+
+            joint.slerpDrive = slerpDrive;
+        }
+
+        animator.SetBool("drag", false);
+        animator.SetLayerWeight(animator.GetLayerIndex(dragLayerName), 0);
+    }
+
     // Dragging Logic
-    private void StartDragging()
+    private void startDragging()
     {
         hasItem = true;
         objectToPickUp.GetComponent<Rigidbody>().isKinematic = false;
         objectToPickUp.transform.parent = null;
 
-        StartCoroutine(DragObject());
+        StartCoroutine(dragObject());
     }
 
-    private void StopDragging()
+    private void stopDragging()
     {
         hasItem = false;
         isDragging = false;
-        StopCoroutine(DragObject());
+        StopCoroutine(dragObject());
     }
 
-    private IEnumerator DragObject()
+    private IEnumerator dragObject()
     {
         while (hasItem)
         {
-            Vector3 playerPosition = transform.position;
-            Vector3 dragPosition = playerPosition + transform.forward; 
+            Vector3 dragPosition = calculateTargetPosition();
+
+            Vector3 direction = (dragPosition - objectToPickUp.transform.position).normalized;
+            dragPosition = dragPosition - direction * additionalDragDistance;
             dragPosition.y = objectToPickUp.transform.position.y;
+
             objectToPickUp.transform.position = Vector3.Lerp(objectToPickUp.transform.position, dragPosition, Time.deltaTime * 10);
 
             yield return null;
