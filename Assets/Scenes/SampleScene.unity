@@ -315,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &45851016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,6 +854,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb7ec37fa0a8a1541aafd69633b24acd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 502773774}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb7ec37fa0a8a1541aafd69633b24acd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 502773775}
     - targetCorrespondingSourceObject: {fileID: 8232536009477512037, guid: bb7ec37fa0a8a1541aafd69633b24acd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1839916071}
@@ -1653,7 +1656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &224715914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2884,6 +2887,24 @@ MonoBehaviour:
   additionalDragDistance: 1.5
   maxCarryMass: 5
   maxCarrySize: 0.8
+  objectToPickUp: {fileID: 0}
+  hasItem: 0
+  isDragging: 0
+  positionBetweenHands: {x: 0, y: 0, z: 0}
+--- !u!114 &405467751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405467747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824d6b8e09dfbe3468bf6c74bfdc5701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwForce: 80
+  animator: {fileID: 405467749}
 --- !u!1 &424207173 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4819001077394492298, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
@@ -3379,6 +3400,24 @@ MonoBehaviour:
   additionalDragDistance: 1.2
   maxCarryMass: 10
   maxCarrySize: 1.5
+  objectToPickUp: {fileID: 0}
+  hasItem: 0
+  isDragging: 0
+  positionBetweenHands: {x: 0, y: 0, z: 0}
+--- !u!114 &502773775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502773771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824d6b8e09dfbe3468bf6c74bfdc5701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwForce: 70
+  animator: {fileID: 502773773}
 --- !u!54 &509638560
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4463,6 +4502,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1ebfb44105dbf7845968190322ab7285, type: 3}
       insertIndex: -1
       addedObject: {fileID: 623622150}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1ebfb44105dbf7845968190322ab7285, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 623622151}
     - targetCorrespondingSourceObject: {fileID: 3069578117487544106, guid: 1ebfb44105dbf7845968190322ab7285, type: 3}
       insertIndex: -1
       addedObject: {fileID: 623622145}
@@ -4709,6 +4751,24 @@ MonoBehaviour:
   additionalDragDistance: 1.6
   maxCarryMass: 10
   maxCarrySize: 1.5
+  objectToPickUp: {fileID: 0}
+  hasItem: 0
+  isDragging: 0
+  positionBetweenHands: {x: 0, y: 0, z: 0}
+--- !u!114 &623622151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623622141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824d6b8e09dfbe3468bf6c74bfdc5701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwForce: 40
+  animator: {fileID: 623622146}
 --- !u!4 &638326373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bb7ec37fa0a8a1541aafd69633b24acd, type: 3}
@@ -6697,6 +6757,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4c0fd9c184f267e43a260d2f78072cfb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 405467750}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4c0fd9c184f267e43a260d2f78072cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 405467751}
     - targetCorrespondingSourceObject: {fileID: 7179158139332175658, guid: 4c0fd9c184f267e43a260d2f78072cfb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 82388533}
@@ -6790,6 +6853,24 @@ MonoBehaviour:
   additionalDragDistance: 1.5
   maxCarryMass: 10
   maxCarrySize: 1.2
+  objectToPickUp: {fileID: 0}
+  hasItem: 0
+  isDragging: 0
+  positionBetweenHands: {x: 0, y: 0, z: 0}
+--- !u!114 &1348369588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348369584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824d6b8e09dfbe3468bf6c74bfdc5701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwForce: 50
+  animator: {fileID: 1348369586}
 --- !u!1001 &1364330490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8381,15 +8462,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -9206655195127846874, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000019995297
+      value: -0.00029970307
       objectReference: {fileID: 0}
     - target: {fileID: -9206655195127846874, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0143413
+      value: 0.014302056
       objectReference: {fileID: 0}
     - target: {fileID: -9206655195127846874, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.006803752
+      value: -0.0068011554
       objectReference: {fileID: 0}
     - target: {fileID: -9206655195127846874, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8521,15 +8602,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1401557881877447258, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000035585315
+      value: -0.00039993552
       objectReference: {fileID: 0}
     - target: {fileID: 1401557881877447258, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.014350813
+      value: 0.014301231
       objectReference: {fileID: 0}
     - target: {fileID: 1401557881877447258, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0068153394
+      value: 0.006800693
       objectReference: {fileID: 0}
     - target: {fileID: 2198142483762769286, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8561,6 +8642,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1348369587}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1348369588}
     - targetCorrespondingSourceObject: {fileID: 6905609870639353253, guid: 62eaf7c8f8b80d8498f61dadfc080dd2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 446066013}
@@ -8927,7 +9011,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 5, z: 5}
+  m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1783513374
 BoxCollider:

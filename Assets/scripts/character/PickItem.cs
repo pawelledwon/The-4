@@ -40,11 +40,14 @@ public class PickUpObject : MonoBehaviour
     private float maxCarrySize = 1.5f;
 
     private bool pickUpPossible;
-    private bool hasItem;
-    private bool isDragging;
-
+    
     private List<GameObject> possibleObjectsToPickUp = new List<GameObject>();
-    private GameObject objectToPickUp;
+
+    public GameObject objectToPickUp;
+    public bool hasItem;
+    public bool isDragging;
+    public Vector3 positionBetweenHands;
+
     void Start()
     {
         pickUpPossible = false;   
@@ -54,7 +57,22 @@ public class PickUpObject : MonoBehaviour
 
     void Update()
     {
-        if(possibleObjectsToPickUp.Count > 0) 
+        checkForItemToPick();
+
+        if (pickUpPossible)
+        {
+            pickUpItem();
+        }
+
+        if ((Input.GetKeyDown("e") && hasItem) || !pickUpPossible)
+        {
+            dropItem();
+        }
+    }
+
+    void checkForItemToPick()
+    {
+        if (possibleObjectsToPickUp.Count > 0)
         {
             pickUpPossible = true;
 
@@ -63,7 +81,6 @@ public class PickUpObject : MonoBehaviour
                 objectToPickUp = getObjectInSight();
                 decidePickUpOrDrag();
             }
-            
         }
         else
         {
@@ -71,36 +88,39 @@ public class PickUpObject : MonoBehaviour
             objectToPickUp = null;
             isDragging = false;
         }
-
-        if (pickUpPossible)
+    }
+    
+    void pickUpItem()
+    {
+        if (Input.GetKeyDown("e"))
         {
-            if (Input.GetKeyDown("e"))
-            {
 
-                if (isDragging)
-                {
-                    animateDragging();
-                }
-                else
-                {
-                    animatePickUp();
-                }
-            }
-        }
-
-        if ((Input.GetKeyDown("q") && hasItem) || !pickUpPossible)
-        {
             if (isDragging)
             {
-                disableAnimateDragging();
-                stopDragging();
+                animateDragging();
             }
             else
             {
-                disableAnimatePickUp();
-                changeObjPosToDropped();
+                animatePickUp();
             }
         }
+        
+    }
+
+    public void dropItem()
+    {
+        
+        if (isDragging)
+        {
+            disableAnimateDragging();
+            stopDragging();
+        }
+        else
+        {
+            disableAnimatePickUp();
+            changeObjPosToDropped();
+        }
+        
     }
 
     public void onObjectInRange(GameObject obj)
@@ -154,7 +174,7 @@ public class PickUpObject : MonoBehaviour
         return closestObject;
     }
 
-    private Vector3 calculateTargetPosition()
+    public void calculateTargetPosition()
     {
         float a = leftHand.transform.position.x;
         float b = leftHand.transform.position.y;
@@ -169,8 +189,7 @@ public class PickUpObject : MonoBehaviour
         Vector3 direction = (midpoint - playerPosition);
         direction.y = 0;
 
-        Vector3 extendedPosition = midpoint + direction * additionalPickUpDistance;
-        return extendedPosition;
+        positionBetweenHands = midpoint + direction * additionalPickUpDistance;
     }
 
     public void changeObjPosToPicked()
@@ -178,8 +197,8 @@ public class PickUpObject : MonoBehaviour
         hasItem = true;
         objectToPickUp.GetComponent<Rigidbody>().isKinematic = true;
 
-        Vector3 pickedObjectPosition = calculateTargetPosition();
-        objectToPickUp.transform.position = pickedObjectPosition;
+        calculateTargetPosition();
+        objectToPickUp.transform.position = positionBetweenHands;
         objectToPickUp.transform.parent = leftHand.transform;
         objectToPickUp.GetComponent<Collider>().enabled = false;
     }
@@ -273,13 +292,13 @@ public class PickUpObject : MonoBehaviour
     {
         while (hasItem)
         {
-            Vector3 dragPosition = calculateTargetPosition();
+            calculateTargetPosition();
 
-            Vector3 direction = (dragPosition - objectToPickUp.transform.position).normalized;
-            dragPosition = dragPosition - direction * additionalDragDistance;
-            dragPosition.y = objectToPickUp.transform.position.y;
+            Vector3 direction = (positionBetweenHands - objectToPickUp.transform.position).normalized;
+            positionBetweenHands = positionBetweenHands - direction * additionalDragDistance;
+            positionBetweenHands.y = objectToPickUp.transform.position.y;
 
-            objectToPickUp.transform.position = Vector3.Lerp(objectToPickUp.transform.position, dragPosition, Time.deltaTime * 10);
+            objectToPickUp.transform.position = Vector3.Lerp(objectToPickUp.transform.position, positionBetweenHands, Time.deltaTime * 10);
 
             yield return null;
         }
