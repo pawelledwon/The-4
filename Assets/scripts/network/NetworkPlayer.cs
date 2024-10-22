@@ -10,6 +10,8 @@ public class NetworkPlayer : MonoBehaviour
     private ConfigurableJoint mainJoint;
     [SerializeField]
     private Animator animator;
+    [SerializeField]
+    private CameraPositioner cameraPositioner;
 
     private Vector2 moveInput = Vector2.zero;
     private bool jumpButtonPressed = false;
@@ -19,6 +21,7 @@ public class NetworkPlayer : MonoBehaviour
     private float maxSpeed = 3.0f;
     private bool isGrounded = false;
     private RaycastHit[] raycastHits = new RaycastHit[10];
+    private bool isCharacterVisible = false;
 
     private SyncPhysicsWithJoint[] syncPhysicsWithJoints;
 
@@ -40,15 +43,6 @@ public class NetworkPlayer : MonoBehaviour
     void FixedUpdate(){
         isGrounded = CheckIfGrounded();
 
-        int numberOfHits = Physics.SphereCastNonAlloc(rigidBody.position, 0.1f, transform.up * -1, raycastHits, 0.5f);
-
-        for(int i = 0; i < numberOfHits; i++){
-            if(raycastHits[i].transform.root != transform){
-                isGrounded = true;
-                break;
-            }
-        }
-
         if(!isGrounded && jumpButtonPressed){
             rigidBody.AddForce(Vector3.down * 20);
         }
@@ -61,10 +55,24 @@ public class NetworkPlayer : MonoBehaviour
             Quaternion desiredDirection = Quaternion.LookRotation(new Vector3(moveInput.x, 0, moveInput.y * -1), transform.up);
             
             mainJoint.targetRotation = Quaternion.RotateTowards(mainJoint.targetRotation, desiredDirection, Time.fixedDeltaTime * 300);
-            
-            if(localForwardSpeed < maxSpeed){
-                rigidBody.AddForce(-transform.right * inputMagnitued * 30);
+
+
+            isCharacterVisible = cameraPositioner.IsInView(this.gameObject);
+            if(isCharacterVisible)
+            {
+                if (localForwardSpeed < maxSpeed)
+                {
+                    rigidBody.AddForce(-transform.right * inputMagnitued * 30);
+                }
             }
+            else
+            {
+                if (!cameraPositioner.IsFacingCamera(this.gameObject.transform))
+                {
+                    rigidBody.AddForce(-transform.right * inputMagnitued * 30);
+                }
+            }
+
         }
 
         if(isGrounded && jumpButtonPressed){
@@ -82,80 +90,68 @@ public class NetworkPlayer : MonoBehaviour
     }
 
     private bool CheckIfGrounded()
-{
-    float rayLength = 0.7f;  // Length of rays for detecting the ground
-    Vector3[] raycastOrigins = new Vector3[3];
-
-    // Define raycast origins (feet and center)
-    raycastOrigins[0] = transform.position + Vector3.up * 0.1f;  // Center bottom
-    raycastOrigins[1] = transform.position + Vector3.right * 0.2f;  // Right foot
-    raycastOrigins[2] = transform.position + Vector3.left * 0.2f;  // Left foot
-
-    foreach (var origin in raycastOrigins)
     {
-        if (Physics.Raycast(origin, Vector3.down, rayLength))
-        {
-            return true;  // Return true if any ray hits the ground
-        }
-    }
+        float rayLength = 0.7f; 
+        Vector3[] raycastOrigins = new Vector3[3];
 
-    return false;  // Return false if no rays hit the ground
-}
+        raycastOrigins[0] = transform.position + Vector3.up * 0.1f;  
+        raycastOrigins[1] = transform.position + Vector3.right * 0.2f; 
+        raycastOrigins[2] = transform.position + Vector3.left * 0.2f; 
+
+        foreach (var origin in raycastOrigins)
+        {
+            if (Physics.Raycast(origin, Vector3.down, rayLength))
+            {
+                return true;  
+            }
+        }
+
+        return false;  
+    }
 
 void DetectDoubleSpacePress()
     {
         print(doubleSpaceTriggered);
         print(isGrounded);
         print(jumpButtonPressed);
-        if (Time.time - lastJumpPressTime < doubleClickThreshold) // Check if it's a double-click
+        if (Time.time - lastJumpPressTime < doubleClickThreshold)
         {
-            doubleSpaceTriggered = true; // Double space detected, allow joint changes
+            doubleSpaceTriggered = true; 
             SetConfigurableJointToFree();
         }
         else
         {
-            // Detected a single press, set jumpButtonPressed to true for normal jump
             jumpButtonPressed = true;
         }
 
-        lastJumpPressTime = Time.time; // Update the time of last press
+        lastJumpPressTime = Time.time;
 
         if (doubleSpaceTriggered && isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             SetConfigurableJointToLocked();
-            doubleSpaceTriggered = false; // Reset double space trigger after locking joint
+            doubleSpaceTriggered = false;
         }
     }
 
-    // Function to modify ConfigurableJoint when double space is detected
     void SetConfigurableJointToFree()
     {
-        // Set angular motion for x, y, z to free
         mainJoint.angularXMotion = ConfigurableJointMotion.Free;
         mainJoint.angularYMotion = ConfigurableJointMotion.Free;
         mainJoint.angularZMotion = ConfigurableJointMotion.Free;
 
-        // Set slerp drive to 5
         JointDrive slerpDrive = mainJoint.slerpDrive;
         slerpDrive.positionSpring = 5;
         mainJoint.slerpDrive = slerpDrive;
-
-        Debug.Log("Double space pressed! Configurable joint is now free, slerp set to 5.");
     }
 
-    // Function to modify ConfigurableJoint when grounded and space is pressed after double space
     void SetConfigurableJointToLocked()
     {
-        // Set angular motion for x and z to locked, keep y free
         mainJoint.angularXMotion = ConfigurableJointMotion.Locked;
         mainJoint.angularYMotion = ConfigurableJointMotion.Free;
         mainJoint.angularZMotion = ConfigurableJointMotion.Locked;
 
-        // Set slerp drive to 100
         JointDrive slerpDrive = mainJoint.slerpDrive;
         slerpDrive.positionSpring = 100;
         mainJoint.slerpDrive = slerpDrive;
-
-        Debug.Log("Character grounded and space pressed. Configurable joint x and z locked, slerp set to 100.");
     }
 }

@@ -274,11 +274,19 @@ public class PickUpObject : MonoBehaviour
     // Dragging Logic
     private void startDragging()
     {
-        hasItem = true;
-        objectToPickUp.GetComponent<Rigidbody>().isKinematic = false;
-        objectToPickUp.transform.parent = null;
+        if (objectToPickUp != null) 
+        {
+            hasItem = true;
+            objectToPickUp.GetComponent<Rigidbody>().isKinematic = false;
+            objectToPickUp.transform.parent = null;
 
-        StartCoroutine(dragObject());
+            StartCoroutine(dragObject());
+        }
+        else
+        {
+            disableAnimateDragging();
+        }
+       
     }
 
     private void stopDragging()
