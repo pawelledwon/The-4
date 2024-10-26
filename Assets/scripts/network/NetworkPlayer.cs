@@ -12,13 +12,14 @@ public class NetworkPlayer : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private CameraPositioner cameraPositioner;
+    [SerializeField]
+    private float maxSpeed = 2.0f;
 
     private Vector2 moveInput = Vector2.zero;
     private bool jumpButtonPressed = false;
     private float lastJumpPressTime = 0f;
     private float doubleClickThreshold = 0.5f;
     private bool doubleSpaceTriggered = false;
-    private float maxSpeed = 3.0f;
     private bool isGrounded = false;
     private RaycastHit[] raycastHits = new RaycastHit[10];
     private bool isCharacterVisible = false;
@@ -52,12 +53,14 @@ public class NetworkPlayer : MonoBehaviour
         float localForwardSpeed = Vector3.Magnitude(rigidBody.velocity);
 
         if(inputMagnitued != 0){
-            Quaternion desiredDirection = Quaternion.LookRotation(new Vector3(moveInput.x, 0, moveInput.y * -1), transform.up);
+            
+            Quaternion desiredDirection = Quaternion.LookRotation(new Vector3(moveInput.x * -1, 0, moveInput.y), transform.up);
             
             mainJoint.targetRotation = Quaternion.RotateTowards(mainJoint.targetRotation, desiredDirection, Time.fixedDeltaTime * 300);
 
 
             isCharacterVisible = cameraPositioner.IsInView(this.gameObject);
+
             if(isCharacterVisible)
             {
                 if (localForwardSpeed < maxSpeed)
