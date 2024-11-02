@@ -57,16 +57,19 @@ public class PickUpObject : MonoBehaviour
 
     void Update()
     {
-        checkForItemToPick();
-
-        if (pickUpPossible)
+        if (Input.GetKeyDown("e"))
         {
-            pickUpItem();
-        }
+            checkForItemToPick();
 
-        if ((Input.GetKeyDown("e") && hasItem) || !pickUpPossible)
-        {
-            dropItem();
+            if (pickUpPossible && !hasItem)
+            {
+                pickUpItem();
+            }
+
+            if(!pickUpPossible || hasItem)
+            {
+                dropItem();
+            }
         }
     }
 
@@ -85,26 +88,25 @@ public class PickUpObject : MonoBehaviour
         else
         {
             pickUpPossible = false;
-            objectToPickUp = null;
-            isDragging = false;
+
+            if(objectToPickUp != null)
+            {
+                dropItem();
+                objectToPickUp = null;
+            }
         }
     }
     
     void pickUpItem()
     {
-        if (Input.GetKeyDown("e"))
+        if (isDragging)
         {
-
-            if (isDragging)
-            {
-                animateDragging();
-            }
-            else
-            {
-                animatePickUp();
-            }
+            animateDragging();
         }
-        
+        else
+        {
+            animatePickUp();
+        }
     }
 
     public void dropItem()
@@ -125,7 +127,7 @@ public class PickUpObject : MonoBehaviour
 
     public void onObjectInRange(GameObject obj)
     {
-        if (obj.CompareTag("PickUpObject")) // Assuming objects have a tag "PickUpObject"
+        if (obj.CompareTag("PickUpObject"))
         {
             possibleObjectsToPickUp.Add(obj.gameObject);
         }
@@ -157,16 +159,17 @@ public class PickUpObject : MonoBehaviour
     private GameObject getObjectInSight()
     {
         GameObject closestObject = null;
-        float maxDotProduct = -1f; 
+        float minDistance = float.MaxValue;
+        
 
         foreach (GameObject obj in possibleObjectsToPickUp)
         {
-            Vector3 directionToObj = (obj.transform.position - transform.position).normalized;
-            float dotProduct = Vector3.Dot(transform.forward, directionToObj);
+            
+            float distance = Vector3.Distance(obj.GetComponent<Renderer>().bounds.center, transform.position);
 
-            if (dotProduct > maxDotProduct)
+            if (distance < minDistance)
             {
-                maxDotProduct = dotProduct;
+                minDistance = distance;
                 closestObject = obj;
             }
         }
@@ -194,13 +197,17 @@ public class PickUpObject : MonoBehaviour
 
     public void changeObjPosToPicked()
     {
-        hasItem = true;
-        objectToPickUp.GetComponent<Rigidbody>().isKinematic = true;
+        if(objectToPickUp != null)
+        {
+            hasItem = true;
+            objectToPickUp.GetComponent<Rigidbody>().isKinematic = true;
 
-        calculateTargetPosition();
-        objectToPickUp.transform.position = positionBetweenHands;
-        objectToPickUp.transform.parent = leftHand.transform;
-        objectToPickUp.GetComponent<Collider>().enabled = false;
+            calculateTargetPosition();
+            objectToPickUp.GetComponent<Collider>().enabled = false;
+            objectToPickUp.transform.position = positionBetweenHands;
+            objectToPickUp.transform.parent = leftHand.transform;
+        }
+       
     }
 
     public void changeObjPosToDropped()
@@ -252,7 +259,7 @@ public class PickUpObject : MonoBehaviour
 
             joint.slerpDrive = slerpDrive;
         }
-        print("essa");
+
         animator.SetBool("drag", true);
         animator.SetLayerWeight(animator.GetLayerIndex(dragLayerName), 1);
     }
@@ -300,13 +307,21 @@ public class PickUpObject : MonoBehaviour
     {
         while (hasItem)
         {
+            
             calculateTargetPosition();
 
-            Vector3 direction = (positionBetweenHands - objectToPickUp.transform.position).normalized;
-            positionBetweenHands = positionBetweenHands - direction * additionalDragDistance;
+            Vector3 direction = -transform.right;
+            positionBetweenHands = positionBetweenHands + direction * additionalDragDistance;
             positionBetweenHands.y = objectToPickUp.transform.position.y;
 
             objectToPickUp.transform.position = Vector3.Lerp(objectToPickUp.transform.position, positionBetweenHands, Time.deltaTime * 10);
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+            objectToPickUp.transform.rotation = Quaternion.Lerp(
+                objectToPickUp.transform.rotation,
+                targetRotation,
+                Time.deltaTime * 10
+            );
 
             yield return null;
         }

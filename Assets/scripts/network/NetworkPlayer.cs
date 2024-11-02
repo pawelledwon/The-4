@@ -14,6 +14,12 @@ public class NetworkPlayer : MonoBehaviour
     private CameraPositioner cameraPositioner;
     [SerializeField]
     private float maxSpeed = 2.0f;
+    [SerializeField]
+    private Vector3 checkPoint = new(0, 0, 0);
+    [SerializeField]
+    private float fallThreshold = -10f;
+    [SerializeField]
+    private PhysicMaterial zeroFrictionMaterial;
 
     private Vector2 moveInput = Vector2.zero;
     private bool jumpButtonPressed = false;
@@ -23,12 +29,13 @@ public class NetworkPlayer : MonoBehaviour
     private bool isGrounded = false;
     private RaycastHit[] raycastHits = new RaycastHit[10];
     private bool isCharacterVisible = false;
-
+    private Collider playerCollider;
     private SyncPhysicsWithJoint[] syncPhysicsWithJoints;
 
     void Awake()
     {
         syncPhysicsWithJoints = GetComponentsInChildren<SyncPhysicsWithJoint>();
+        playerCollider = GetComponent<Collider>();
     }
 
     void Update()
@@ -42,9 +49,20 @@ public class NetworkPlayer : MonoBehaviour
     }
 
     void FixedUpdate(){
+        CheckIfCharacterFell();
+
         isGrounded = CheckIfGrounded();
 
-        if(!isGrounded && jumpButtonPressed){
+        if (isGrounded)
+        {
+            playerCollider.material = null;
+        }
+        else
+        {
+            playerCollider.material = zeroFrictionMaterial;
+        }
+
+        if (!isGrounded && jumpButtonPressed){
             rigidBody.AddForce(Vector3.down * 20);
         }
 
@@ -156,5 +174,16 @@ void DetectDoubleSpacePress()
         JointDrive slerpDrive = mainJoint.slerpDrive;
         slerpDrive.positionSpring = 100;
         mainJoint.slerpDrive = slerpDrive;
+    }
+
+    void CheckIfCharacterFell()
+    {
+        if (transform.position.y < fallThreshold)
+        {
+            this.rigidBody.velocity = Vector3.zero;
+            this.rigidBody.angularVelocity = Vector3.zero;
+            checkPoint.y += 2.0f;
+            transform.position = checkPoint;
+        }
     }
 }

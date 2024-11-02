@@ -44,7 +44,7 @@ public class CameraPositioner : MonoBehaviour
 
         Vector3 centerPosition = bounds.center;
 
-        Vector3 newPosition = new Vector3(centerPosition.x + distanceFromCharacters*1.5f, cameraHeight, centerPosition.z + distanceFromCharacters);
+        Vector3 newPosition = new Vector3(centerPosition.x + distanceFromCharacters*1.5f, centerPosition.y + cameraHeight, centerPosition.z + distanceFromCharacters);
         
         transform.position = newPosition;
         transform.rotation = Quaternion.Euler(xCameraAngle, yCameraAngle, 0);
