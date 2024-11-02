@@ -186,4 +186,9 @@ void DetectDoubleSpacePress()
             transform.position = checkPoint;
         }
     }
+
+    public void UpdateCheckpoint(Vector3 checkPointPosition)
+    {
+        checkPoint = checkPointPosition;
+    }
 }
