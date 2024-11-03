@@ -15,11 +15,11 @@ public class NetworkPlayer : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 2.0f;
     [SerializeField]
-    private Vector3 checkPoint = new(0, 0, 0);
-    [SerializeField]
     private float fallThreshold = -10f;
     [SerializeField]
     private PhysicMaterial zeroFrictionMaterial;
+
+    public Vector3 checkPoint = new(0, 0, 0);
 
     private Vector2 moveInput = Vector2.zero;
     private bool jumpButtonPressed = false;
@@ -190,5 +190,24 @@ void DetectDoubleSpacePress()
     public void UpdateCheckpoint(Vector3 checkPointPosition)
     {
         checkPoint = checkPointPosition;
+    }
+
+    public void SavePlayer(string fileName)
+    {
+        SaveSystem.SavePlayer(this, fileName);
+    }
+
+    public PlayerData LoadPlayer(string fileName)
+    {
+        PlayerData data = SaveSystem.LoadPlayer(fileName);
+
+        Vector3 position;
+        position.x = data.checkPointPosition[0];
+        position.y = data.checkPointPosition[1];
+        position.z = data.checkPointPosition[2];
+
+        transform.position = position;
+
+        return data;
     }
 }

@@ -10798,7 +10798,7 @@ MonoBehaviour:
   - {fileID: 1085831761}
   - {fileID: 940512528}
   additionalPickUpDistance: 4
-  additionalDragDistance: 0.2
+  additionalDragDistance: 0.5
   maxCarryMass: 5
   maxCarrySize: 2
   objectToPickUp: {fileID: 0}

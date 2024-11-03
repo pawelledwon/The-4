@@ -2370,7 +2370,7 @@ Transform:
   m_GameObject: {fileID: 203531089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.98, y: 0.321, z: -3.76}
+  m_LocalPosition: {x: 3.98, y: 0.321, z: 54.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2434,9 +2434,9 @@ MonoBehaviour:
   animator: {fileID: 1746089411}
   cameraPositioner: {fileID: 709413208}
   maxSpeed: 2
-  checkPoint: {x: 0, y: 2, z: 0}
   fallThreshold: -30
   zeroFrictionMaterial: {fileID: 13400000, guid: 35b57578d8bbcf64fbbc8c9b7e5683f7, type: 2}
+  checkPoint: {x: 0, y: 2, z: 0}
 --- !u!114 &203531094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3767,6 +3767,7 @@ GameObject:
   - component: {fileID: 315761259}
   - component: {fileID: 315761258}
   - component: {fileID: 315761263}
+  - component: {fileID: 315761264}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3887,6 +3888,27 @@ MonoBehaviour:
   loadingScreen: {fileID: 1690399772}
   currentScreen: {fileID: 1932030453}
   loadingSlider: {fileID: 1974540085}
+--- !u!114 &315761264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315761257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3d32c7a646110418132ed7d5ba5db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerFileMappings:
+  - player: {fileID: 203531093}
+    fileName: muscle
+  - player: {fileID: 652029069}
+    fileName: small
+  - player: {fileID: 1965539797}
+    fileName: default
+  - player: {fileID: 659179962}
+    fileName: long
 --- !u!1 &340539841
 GameObject:
   m_ObjectHideFlags: 0
@@ -4958,53 +4980,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &428224563
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 428224565}
-  - component: {fileID: 428224564}
-  m_Layer: 0
-  m_Name: AsyncManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &428224564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428224563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 088b50fed61bea74b8046f4e9dc32bfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadingScreen: {fileID: 0}
-  currentScreen: {fileID: 0}
-  loadingSlider: {fileID: 0}
---- !u!4 &428224565
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428224563}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 530.98883, y: 372.76172, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &433922802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7385,7 +7360,7 @@ Transform:
   m_GameObject: {fileID: 652029065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.461, y: 0.34, z: -3.759999}
+  m_LocalPosition: {x: 2.461, y: 0.34, z: 54.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7449,9 +7424,9 @@ MonoBehaviour:
   animator: {fileID: 139986534}
   cameraPositioner: {fileID: 709413208}
   maxSpeed: 2.7
-  checkPoint: {x: 0, y: 2, z: 0}
   fallThreshold: -30
   zeroFrictionMaterial: {fileID: 13400000, guid: 35b57578d8bbcf64fbbc8c9b7e5683f7, type: 2}
+  checkPoint: {x: 0, y: 2, z: 0}
 --- !u!114 &652029070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7674,9 +7649,9 @@ MonoBehaviour:
   animator: {fileID: 837739447}
   cameraPositioner: {fileID: 709413208}
   maxSpeed: 2.2
-  checkPoint: {x: 0, y: 2, z: 0}
   fallThreshold: -30
   zeroFrictionMaterial: {fileID: 13400000, guid: 35b57578d8bbcf64fbbc8c9b7e5683f7, type: 2}
+  checkPoint: {x: 0, y: 2, z: 0}
 --- !u!114 &659179963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7856,7 +7831,7 @@ Transform:
   m_GameObject: {fileID: 659179960}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.679, y: 0.34, z: -3.759999}
+  m_LocalPosition: {x: -0.679, y: 0.34, z: 54.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13110,9 +13085,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 315761258}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: Save
+      - m_Target: {fileID: 315761264}
+        m_TargetAssemblyTypeName: SaveGame, Assembly-CSharp
+        m_MethodName: SaveGameState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17886,7 +17861,7 @@ Transform:
   m_GameObject: {fileID: 1965539792}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.921, y: 0.668, z: -3.759999}
+  m_LocalPosition: {x: 0.921, y: 0.668, z: 54.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17992,9 +17967,9 @@ MonoBehaviour:
   animator: {fileID: 1716836159}
   cameraPositioner: {fileID: 709413208}
   maxSpeed: 2.4
-  checkPoint: {x: 0, y: 2, z: 0}
   fallThreshold: -10
   zeroFrictionMaterial: {fileID: 13400000, guid: 35b57578d8bbcf64fbbc8c9b7e5683f7, type: 2}
+  checkPoint: {x: 0, y: 2, z: 0}
 --- !u!114 &1965539798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19795,4 +19770,3 @@ SceneRoots:
   - {fileID: 947289873}
   - {fileID: 315761262}
   - {fileID: 1878618383}
-  - {fileID: 428224565}
