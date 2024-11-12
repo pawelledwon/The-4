@@ -14,7 +14,7 @@ public class FinishLevel : MonoBehaviour
         if(other.tag == "Player")
         {
             players.Add(other.gameObject);
-            other.gameObject.SetActive(false);
+            other.gameObject.GetComponent<NetworkPlayer>().enabled = false;
         }
     }
 

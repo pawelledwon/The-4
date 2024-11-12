@@ -5,15 +5,26 @@ public class CheckpointManager : MonoBehaviour
 {
     public static CheckpointManager Instance;
 
-    public List<NetworkPlayer> players = new List<NetworkPlayer>();
     public List<Checkpoint> checkpoints = new List<Checkpoint>();
 
+    private List<NetworkPlayer> players = new List<NetworkPlayer>();
     private int currentCheckpointIndex = -1;
 
     private void Awake()
     {
+       
+
         if (Instance == null)
+        {
             Instance = this;
+
+            NetworkPlayer[] players = FindObjectsOfType<NetworkPlayer>();
+
+            foreach (NetworkPlayer player in players)
+            {
+                this.players.Add(player);
+            }
+        }
         else
             Destroy(gameObject);
     }

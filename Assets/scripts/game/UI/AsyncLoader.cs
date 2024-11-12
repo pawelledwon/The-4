@@ -17,6 +17,18 @@ public class AsyncLoader : MonoBehaviour
 
     public void LoadLevelButton(string levelToLoad)
     {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.CompareTag("Player"))
+            {
+                obj.SetActive(true);
+                obj.gameObject.GetComponent<NetworkPlayer>().enabled = true;
+                obj.transform.position = new Vector3(0, 2, 0);
+            }
+        }
+
         currentScreen.SetActive(false);
         loadingScreen.SetActive(true);
 
