@@ -250,7 +250,7 @@ MonoBehaviour:
   animator: {fileID: 116643787}
   cameraPositioner: {fileID: 432509196}
   maxSpeed: 2.2
-  fallThreshold: -30
+  fallThreshold: -10
   zeroFrictionMaterial: {fileID: 13400000, guid: 35b57578d8bbcf64fbbc8c9b7e5683f7, type: 2}
   checkPoint: {x: 0, y: 2, z: 0}
 --- !u!114 &34437689
@@ -1718,6 +1718,7 @@ MonoBehaviour:
   - {fileID: 1611677081}
   - {fileID: 432509195}
   - {fileID: 289561428}
+  - {fileID: 1163149742}
 --- !u!4 &289561430
 Transform:
   m_ObjectHideFlags: 0
@@ -10660,7 +10661,7 @@ MonoBehaviour:
   animator: {fileID: 1691994436}
   cameraPositioner: {fileID: 432509196}
   maxSpeed: 2.7
-  fallThreshold: -30
+  fallThreshold: -10
   zeroFrictionMaterial: {fileID: 13400000, guid: 35b57578d8bbcf64fbbc8c9b7e5683f7, type: 2}
   checkPoint: {x: 0, y: 2, z: 0}
 --- !u!114 &1611677086
@@ -11141,15 +11142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3d32c7a646110418132ed7d5ba5db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFileMappings:
-  - player: {fileID: 710979979}
-    fileName: default
-  - player: {fileID: 34437688}
-    fileName: long
-  - player: {fileID: 1611677085}
-    fileName: small
-  - player: {fileID: 2111572010}
-    fileName: muscle
   asyncLoader: {fileID: 1690448839}
 --- !u!1 &1691994432 stripped
 GameObject:
@@ -13097,7 +13089,7 @@ MonoBehaviour:
   animator: {fileID: 919825653}
   cameraPositioner: {fileID: 432509196}
   maxSpeed: 2
-  fallThreshold: -30
+  fallThreshold: -10
   zeroFrictionMaterial: {fileID: 13400000, guid: 35b57578d8bbcf64fbbc8c9b7e5683f7, type: 2}
   checkPoint: {x: 0, y: 2, z: 0}
 --- !u!114 &2111572011

@@ -15,7 +15,7 @@ public class NetworkPlayer : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 2.0f;
     [SerializeField]
-    private float fallThreshold = -10f;
+    private float fallThreshold = -5f;
     [SerializeField]
     private PhysicMaterial zeroFrictionMaterial;
 

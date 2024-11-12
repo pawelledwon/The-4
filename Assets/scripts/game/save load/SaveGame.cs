@@ -11,14 +11,53 @@ public class PlayerFileMapping
 
 public class SaveGame : MonoBehaviour
 {
-    [SerializeField]
-    private List<PlayerFileMapping> playerFileMappings;
+    
 
     [SerializeField]
     private AsyncLoader asyncLoader;
 
+    private List<PlayerFileMapping> playerFileMappings = new List<PlayerFileMapping>();
+
+    void LoadPlayerList()
+    {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        List<GameObject> playerObjects = new List<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.CompareTag("Player"))
+            {
+                playerObjects.Add(obj);
+            }
+        }
+
+        foreach (var playerObj in playerObjects)
+        {
+            NetworkPlayer networkPlayer = playerObj.GetComponent<NetworkPlayer>();
+
+            if (networkPlayer != null)
+            {
+                PlayerFileMapping mapping = new PlayerFileMapping
+                {
+                    player = networkPlayer,
+                    fileName = networkPlayer.name
+                };
+
+                playerFileMappings.Add(mapping);
+            }
+            else
+            {
+                Debug.LogWarning("GameObject tagged as 'Player' does not have a NetworkPlayer component.");
+            }
+        }
+    }
+
     public void SaveGameState()
     {
+        if(playerFileMappings.Count == 0) 
+        {
+            LoadPlayerList();
+        }
+
         foreach (var mapping in playerFileMappings)
         {
             if (mapping.player != null && !string.IsNullOrEmpty(mapping.fileName))
@@ -30,6 +69,11 @@ public class SaveGame : MonoBehaviour
 
     public void LoadGameState()
     {
+        if (playerFileMappings.Count == 0)
+        {
+            LoadPlayerList();
+        }
+
         string levelName = "";
         foreach (var mapping in playerFileMappings)
         {
