@@ -631,7 +631,7 @@ MonoBehaviour:
   - {fileID: 1245221807}
   additionalPickUpDistance: 4
   additionalDragDistance: 0.2
-  maxCarryMass: 15
+  maxCarryMass: 20
   maxCarrySize: 5
   objectToPickUp: {fileID: 0}
   hasItem: 0
@@ -2398,7 +2398,7 @@ MonoBehaviour:
   - {fileID: 1590126433}
   additionalPickUpDistance: 4
   additionalDragDistance: 0.3
-  maxCarryMass: 10
+  maxCarryMass: 15
   maxCarrySize: 3.5
   objectToPickUp: {fileID: 0}
   hasItem: 0
@@ -5601,7 +5601,7 @@ MonoBehaviour:
   - {fileID: 381555278}
   additionalPickUpDistance: 4
   additionalDragDistance: 0.2
-  maxCarryMass: 25
+  maxCarryMass: 30
   maxCarrySize: 10
   objectToPickUp: {fileID: 0}
   hasItem: 0
@@ -11191,7 +11191,7 @@ MonoBehaviour:
   - {fileID: 1359744563}
   additionalPickUpDistance: 4
   additionalDragDistance: 0.2
-  maxCarryMass: 5
+  maxCarryMass: 10
   maxCarrySize: 2
   objectToPickUp: {fileID: 0}
   hasItem: 0
