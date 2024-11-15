@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MoveParkour : MonoBehaviour
@@ -19,6 +20,7 @@ public class MoveParkour : MonoBehaviour
     private void Start()
     {
         parkourObjects = GameObject.FindGameObjectsWithTag("ParkourObject");
+        parkourObjects = parkourObjects.OrderBy(parkour => parkour.name).ToArray();
 
         foreach (var parkourObject in parkourObjects)
         {
