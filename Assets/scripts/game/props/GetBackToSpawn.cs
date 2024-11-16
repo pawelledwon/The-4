@@ -8,11 +8,13 @@ public class GetBackToSpawn : MonoBehaviour
     private float fallThreshold = -10.0f;
 
     private Vector3 startPosition;
+    private Quaternion rotation;
     private Rigidbody rigidBody;
 
     void Start()
     {
         startPosition = transform.position;
+        rotation = transform.rotation;
         rigidBody = GetComponent<Rigidbody>();
 
     }
@@ -27,9 +29,10 @@ public class GetBackToSpawn : MonoBehaviour
         {
             this.rigidBody.velocity = Vector3.zero;
             this.rigidBody.angularVelocity = Vector3.zero;
-            startPosition.y += 2.0f;
+            startPosition.y += 1.0f;
             transform.position = startPosition;
-            startPosition.y -= 2.0f;
+            transform.rotation = rotation;
+            startPosition.y -= 1.0f;
         }
     }
 }
