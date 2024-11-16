@@ -184,6 +184,7 @@ void DetectDoubleSpacePress()
             this.rigidBody.angularVelocity = Vector3.zero;
             checkPoint.y += 2.0f;
             transform.position = checkPoint;
+            checkPoint.y -= 2.0f;
         }
     }
 

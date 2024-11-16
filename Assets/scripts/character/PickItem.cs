@@ -305,18 +305,31 @@ public class PickUpObject : MonoBehaviour
 
     private IEnumerator dragObject()
     {
+        // Calculate initial rotation offset when dragging starts
+        Vector3 direction = -transform.right; // Initial drag direction
+        Quaternion initialRotationOffset = Quaternion.Inverse(Quaternion.LookRotation(direction, Vector3.up)) * objectToPickUp.transform.rotation;
+
+        // Get the relevant drag distance based on object size and direction
+        float objectDragDistance = calculateRelevantDragDistance(objectToPickUp, direction);
+
         while (hasItem)
         {
-            
             calculateTargetPosition();
 
-            Vector3 direction = -transform.right;
-            positionBetweenHands = positionBetweenHands + direction * additionalDragDistance;
+            direction = -transform.right; // Update direction continuously
+
+            // Calculate the dynamic drag distance (base + relevant object distance)
+            float dynamicDragDistance = additionalDragDistance + objectDragDistance;
+
+            // Update position accounting for the dynamic drag distance
+            positionBetweenHands = positionBetweenHands + direction * dynamicDragDistance;
             positionBetweenHands.y = objectToPickUp.transform.position.y;
 
+            // Smoothly move the object to the target position
             objectToPickUp.transform.position = Vector3.Lerp(objectToPickUp.transform.position, positionBetweenHands, Time.deltaTime * 10);
 
-            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+            // Maintain original rotation offset
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up) * initialRotationOffset;
             objectToPickUp.transform.rotation = Quaternion.Lerp(
                 objectToPickUp.transform.rotation,
                 targetRotation,
@@ -326,4 +339,21 @@ public class PickUpObject : MonoBehaviour
             yield return null;
         }
     }
+
+    // Helper function to calculate the relevant drag distance based on object's bounds and direction
+    private float calculateRelevantDragDistance(GameObject obj, Vector3 direction)
+    {
+        // Get the object's bounds
+        Bounds bounds = obj.GetComponent<Renderer>().bounds;
+
+        // Project the bounds' extents onto the direction vector to get the "relevant" dimension
+        Vector3 localDirection = obj.transform.InverseTransformDirection(direction);
+
+        // Calculate the absolute size in the drag direction
+        float relevantDistance = Mathf.Abs(Vector3.Dot(bounds.extents, localDirection.normalized));
+
+        return relevantDistance;
+    }
+
+
 }
