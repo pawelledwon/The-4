@@ -44,7 +44,7 @@ public class OpenDoor : MonoBehaviour
         }
     }
 
-    private void OpenTheDoor()
+    public void OpenTheDoor()
     {
         doorRigidbody.mass = newMass;
 
