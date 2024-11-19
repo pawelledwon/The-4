@@ -70,7 +70,16 @@ public class MoveParkour : MonoBehaviour
 
     private void CheckIfSwap()
     {
-        float distanceFromStart = Vector3.Distance(parkourObjects[0].transform.position, parkourObjectStartingPositions[0]);
+        float distanceFromStart = 0;
+
+        for(int i = 0; i < parkourObjects.Count(); i++)
+        {
+            var iDistance = Vector3.Distance(parkourObjects[i].transform.position, parkourObjectStartingPositions[i]);
+            if (iDistance > distanceFromStart)
+            {
+                distanceFromStart = iDistance;
+            }
+        }
 
         if (distanceFromStart > (firstMove ? movementLimit : movementLimit * 2))
         {

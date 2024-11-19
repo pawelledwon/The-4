@@ -1650,10 +1650,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakDelay: 3
-  shakeIntensity: 0.05
-  shakeIncreaseRate: 0.01
-  shakeDuration: 3
+  blinkDuration: 3
   resetDelay: 2
+  originalMaterial: {fileID: 2100000, guid: bcfc8abecd353324bbfc1176c9d26bb3, type: 2}
+  blinkMaterial: {fileID: 2100000, guid: 818a5c6450afe1a4d9802738f03f693b, type: 2}
 --- !u!1 &416998127
 GameObject:
   m_ObjectHideFlags: 0
@@ -3569,10 +3569,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakDelay: 3
-  shakeIntensity: 0.05
-  shakeIncreaseRate: 0.01
-  shakeDuration: 3
+  blinkDuration: 3
   resetDelay: 2
+  originalMaterial: {fileID: 2100000, guid: bcfc8abecd353324bbfc1176c9d26bb3, type: 2}
+  blinkMaterial: {fileID: 2100000, guid: 818a5c6450afe1a4d9802738f03f693b, type: 2}
 --- !u!1 &826755301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3714,10 +3714,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakDelay: 3
-  shakeIntensity: 0.05
-  shakeIncreaseRate: 0.01
-  shakeDuration: 3
+  blinkDuration: 3
   resetDelay: 2
+  originalMaterial: {fileID: 2100000, guid: bcfc8abecd353324bbfc1176c9d26bb3, type: 2}
+  blinkMaterial: {fileID: 2100000, guid: 818a5c6450afe1a4d9802738f03f693b, type: 2}
 --- !u!1001 &842708268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4406,10 +4406,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakDelay: 3
-  shakeIntensity: 0.05
-  shakeIncreaseRate: 0.01
-  shakeDuration: 3
+  blinkDuration: 3
   resetDelay: 2
+  originalMaterial: {fileID: 2100000, guid: bcfc8abecd353324bbfc1176c9d26bb3, type: 2}
+  blinkMaterial: {fileID: 2100000, guid: 818a5c6450afe1a4d9802738f03f693b, type: 2}
 --- !u!1001 &1010984780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5717,10 +5717,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakDelay: 3
-  shakeIntensity: 0.05
-  shakeIncreaseRate: 0.01
-  shakeDuration: 3
+  blinkDuration: 3
   resetDelay: 2
+  originalMaterial: {fileID: 2100000, guid: bcfc8abecd353324bbfc1176c9d26bb3, type: 2}
+  blinkMaterial: {fileID: 2100000, guid: 818a5c6450afe1a4d9802738f03f693b, type: 2}
 --- !u!1 &1252838348
 GameObject:
   m_ObjectHideFlags: 0
@@ -7055,10 +7055,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakDelay: 3
-  shakeIntensity: 0.05
-  shakeIncreaseRate: 0.01
-  shakeDuration: 3
+  blinkDuration: 3
   resetDelay: 2
+  originalMaterial: {fileID: 2100000, guid: bcfc8abecd353324bbfc1176c9d26bb3, type: 2}
+  blinkMaterial: {fileID: 2100000, guid: 818a5c6450afe1a4d9802738f03f693b, type: 2}
 --- !u!1 &1568750541
 GameObject:
   m_ObjectHideFlags: 0
