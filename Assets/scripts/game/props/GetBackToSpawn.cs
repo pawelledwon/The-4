@@ -27,12 +27,17 @@ public class GetBackToSpawn : MonoBehaviour
     {
         if (transform.position.y < fallThreshold)
         {
-            this.rigidBody.velocity = Vector3.zero;
-            this.rigidBody.angularVelocity = Vector3.zero;
-            startPosition.y += 1.0f;
-            transform.position = startPosition;
-            transform.rotation = rotation;
-            startPosition.y -= 1.0f;
+            ResetToSpawn();
         }
+    }
+
+    public void ResetToSpawn()
+    {
+        this.rigidBody.velocity = Vector3.zero;
+        this.rigidBody.angularVelocity = Vector3.zero;
+        startPosition.y += 1.0f;
+        transform.position = startPosition;
+        transform.rotation = rotation;
+        startPosition.y -= 1.0f;
     }
 }
