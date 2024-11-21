@@ -33,7 +33,16 @@ public class PauseMenu : MonoBehaviour
 
     public void Exit()
     {
+        AsyncLoader asyncLoader = FindObjectOfType<AsyncLoader>();
 
+        if (asyncLoader != null)
+        {
+            asyncLoader.LoadLevelButton("Menu");
+        }
+        else
+        {
+            Debug.LogError("AsyncLoader script not found in the scene!");
+        }
     }
 
     private void Pause()
