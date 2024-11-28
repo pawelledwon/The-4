@@ -9,18 +9,16 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameObject pauseMenuUI;
 
-    private void Update()
+
+    public void HandlePauseMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (gamePaused)
         {
-            if(gamePaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            Resume();
+        }
+        else
+        {
+            Pause();
         }
     }
 
@@ -50,5 +48,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gamePaused = true;
+        print(gamePaused);
     }
 }

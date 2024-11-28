@@ -55,21 +55,18 @@ public class PickUpObject : MonoBehaviour
         isDragging = false;
     }
 
-    void Update()
+    public void PickUpItem()
     {
-        if (Input.GetKeyDown("e"))
+        checkForItemToPick();
+
+        if (pickUpPossible && !hasItem)
         {
-            checkForItemToPick();
+            pickUpItem();
+        }
 
-            if (pickUpPossible && !hasItem)
-            {
-                pickUpItem();
-            }
-
-            if(!pickUpPossible || hasItem)
-            {
-                dropItem();
-            }
+        if (!pickUpPossible || hasItem)
+        {
+            dropItem();
         }
     }
 
@@ -164,13 +161,15 @@ public class PickUpObject : MonoBehaviour
 
         foreach (GameObject obj in possibleObjectsToPickUp)
         {
-            
-            float distance = Vector3.Distance(obj.GetComponent<Renderer>().bounds.center, transform.position);
-
-            if (distance < minDistance)
+            if(obj != null)
             {
-                minDistance = distance;
-                closestObject = obj;
+                float distance = Vector3.Distance(obj.GetComponent<Renderer>().bounds.center, transform.position);
+
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestObject = obj;
+                }
             }
         }
 

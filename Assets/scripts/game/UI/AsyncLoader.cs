@@ -12,29 +12,69 @@ public class AsyncLoader : MonoBehaviour
     [SerializeField] 
     private GameObject currentScreen;
 
+    [SerializeField]
+    private GameObject setupPlayersInfo;
+
     [SerializeField] 
     private Slider loadingSlider;
 
     public void LoadLevelButton(string levelToLoad)
     {
-        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-
-        foreach (GameObject obj in allObjects)
+        if (PlayerConfigurationManager.instance != null && PlayerConfigurationManager.instance.AllPlayersReady())
         {
-            if (obj.CompareTag("Player"))
+            GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+            foreach (GameObject obj in allObjects)
             {
-                obj.SetActive(true);
-                obj.gameObject.GetComponent<NetworkPlayer>().enabled = true;
-                obj.transform.position = new Vector3(0, 2, 0);
+                if (obj.CompareTag("Player"))
+                {
+                    obj.SetActive(true);
+                    obj.gameObject.GetComponent<NetworkPlayer>().enabled = true;
+
+                    obj.transform.position = new Vector3(0, 2, 0);
+                    InitializePlayerInput(obj);
+                }
             }
+
+            currentScreen.SetActive(false);
+            loadingScreen.SetActive(true);
+
+            StartCoroutine(LoadLevelAsync(levelToLoad));
         }
-
-        currentScreen.SetActive(false);
-        loadingScreen.SetActive(true);
-
-        StartCoroutine(LoadLevelAsync(levelToLoad));
+        else
+        {
+            setupPlayersInfo.SetActive(true);
+            StartCoroutine(DisableInfoAfterDelay(1.5f));
+        }
+        
     }
-    
+
+    private void InitializePlayerInput(GameObject playerObject)
+    {
+        var configs = PlayerConfigurationManager.instance.GetPlayerConfigurations();
+
+        foreach (var config in configs) 
+        {
+            var playerController = playerObject.GetComponent<NetworkPlayer>();
+
+            if(playerController.GetCharacterName().Equals(config.CharacterName))
+            {
+                var playerInput = playerObject.GetComponent<InputHandler>();
+                playerInput.InitializePlayer(config);    
+            }
+        } 
+    }
+
+    private IEnumerator DisableInfoAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (setupPlayersInfo != null)
+        {
+            setupPlayersInfo.SetActive(false);
+        }
+    }
+
     IEnumerator LoadLevelAsync(string levelToLoad)
     {
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelToLoad);

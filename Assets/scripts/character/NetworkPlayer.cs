@@ -5,6 +5,8 @@ using UnityEngine;
 public class NetworkPlayer : MonoBehaviour
 {
     [SerializeField]
+    private string characterName = "";
+    [SerializeField]
     private Rigidbody rigidBody;
     [SerializeField]
     private ConfigurableJoint mainJoint;
@@ -38,14 +40,14 @@ public class NetworkPlayer : MonoBehaviour
         playerCollider = GetComponent<Collider>();
     }
 
-    void Update()
+    public string GetCharacterName()
     {
-        moveInput.x = Input.GetAxis("Horizontal");
-        moveInput.y = Input.GetAxis("Vertical");
+        return characterName;
+    }
 
-        if(Input.GetKeyDown(KeyCode.Space)){
-            DetectDoubleSpacePress();
-        }
+    public void SetMoveInput(Vector2 move)
+    {
+        moveInput = move;
     }
 
     void FixedUpdate(){
@@ -130,11 +132,8 @@ public class NetworkPlayer : MonoBehaviour
         return false;  
     }
 
-void DetectDoubleSpacePress()
+    public void DetectDoubleSpacePress()
     {
-        print(doubleSpaceTriggered);
-        print(isGrounded);
-        print(jumpButtonPressed);
         if (Time.time - lastJumpPressTime < doubleClickThreshold)
         {
             doubleSpaceTriggered = true; 
@@ -147,7 +146,7 @@ void DetectDoubleSpacePress()
 
         lastJumpPressTime = Time.time;
 
-        if (doubleSpaceTriggered && isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (doubleSpaceTriggered && isGrounded)
         {
             SetConfigurableJointToLocked();
             doubleSpaceTriggered = false;

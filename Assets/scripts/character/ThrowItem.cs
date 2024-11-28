@@ -17,9 +17,9 @@ public class ThrowItem : MonoBehaviour
         pickUpObject = GetComponent<PickUpObject>();
     }
 
-    void Update()
+    public void ThrowItemAway()
     {
-        if (Input.GetKeyDown("q") && pickUpObject.hasItem && !pickUpObject.isDragging)
+        if (pickUpObject.hasItem && !pickUpObject.isDragging)
         {
             animator.SetTrigger("throw");
         }
