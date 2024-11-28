@@ -16,6 +16,9 @@ public class SaveGame : MonoBehaviour
     [SerializeField]
     private AsyncLoader asyncLoader;
 
+    [SerializeField]
+    private GameObject noSavedDataInfo;
+
     private List<PlayerFileMapping> playerFileMappings = new List<PlayerFileMapping>();
 
     void LoadPlayerList()
@@ -80,6 +83,14 @@ public class SaveGame : MonoBehaviour
             if (mapping.player != null && !string.IsNullOrEmpty(mapping.fileName))
             {
                 var data = mapping.player.LoadPlayer(mapping.fileName);
+
+                if(data == null)
+                {
+                    noSavedDataInfo.SetActive(true);
+                    StartCoroutine(NoDataSavedInfoShow(1.5f));
+                    return;
+                }
+
                 levelName = data.levelName;
             }
         }
@@ -91,6 +102,16 @@ public class SaveGame : MonoBehaviour
         else
         {
             Debug.LogError("AsyncLoader reference is missing in SaveGame.");
+        }
+    }
+
+    private IEnumerator NoDataSavedInfoShow(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (noSavedDataInfo != null)
+        {
+            noSavedDataInfo.SetActive(false);
         }
     }
 }

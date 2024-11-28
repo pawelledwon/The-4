@@ -6,7 +6,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
-    private static List<string> fileNames = new List<string> { "DefaultCharacter", "SmallCharacter", "MuscleCharacter", "LongCharacter" };
     public static void SavePlayer(NetworkPlayer player, string fileName)
     {
         BinaryFormatter formatter = new BinaryFormatter();

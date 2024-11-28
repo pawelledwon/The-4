@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ConfigurePlayers : MonoBehaviour
@@ -14,15 +15,46 @@ public class ConfigurePlayers : MonoBehaviour
     [SerializeField]
     private Button setupPlayersButton;
 
-    public void EnableSetupPlayerMenu()
+    private bool allPlayersReady = false;
+
+    private void Update()
+    {
+        if (PlayerConfigurationManager.instance != null)
+        {
+            bool currentReadyState = PlayerConfigurationManager.instance.AllPlayersReady();
+
+            if (currentReadyState != allPlayersReady)
+            {
+                allPlayersReady = currentReadyState;
+
+                if (allPlayersReady)
+                {
+                    DisableSetupMenu();
+                }
+                else
+                {
+                    EnableSetupPlayerMenu();
+                }
+            }
+        }
+    }
+
+    private void EnableSetupPlayerMenu()
     {
         setupPlayer.SetActive(true);
         gameMenu.SetActive(false);
     }
 
-    public void DisableSetupMenu()
+    private void DisableSetupMenu()
     {
         gameMenu.SetActive(true);
         setupPlayersButton.interactable = false;
+
+        EventSystem eventSystem = EventSystem.current;
+        if (eventSystem != null)
+        {
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(gameMenu.GetComponentInChildren<Button>()?.gameObject);
+        }
     }
 }

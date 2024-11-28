@@ -27,7 +27,6 @@ public class PlayerConfigurationManager : MonoBehaviour
        else
        {
             instance = this;
-            DontDestroyOnLoad(this);
             playerConfigurations = new List<PlayerConfiguration>();
        }
     }
@@ -38,7 +37,6 @@ public class PlayerConfigurationManager : MonoBehaviour
         if (playerConfigurations.Count == maxPlayers && playerConfigurations.All(p => p.isReady)) 
         {
             allPlayersReady = true;
-            configurePlayersMenu.DisableSetupMenu();
         }
     }
 

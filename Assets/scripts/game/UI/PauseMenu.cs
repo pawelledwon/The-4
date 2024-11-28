@@ -35,6 +35,7 @@ public class PauseMenu : MonoBehaviour
 
         if (asyncLoader != null)
         {
+            Time.timeScale = 1f;
             asyncLoader.LoadLevelButton("Menu");
         }
         else

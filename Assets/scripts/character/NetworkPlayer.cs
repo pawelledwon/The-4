@@ -201,6 +201,11 @@ public class NetworkPlayer : MonoBehaviour
     {
         PlayerData data = SaveSystem.LoadPlayer(fileName);
 
+        if(data == null)
+        {
+            return null;
+        }
+
         Vector3 position;
         position.x = data.checkPointPosition[0];
         position.y = data.checkPointPosition[1];
