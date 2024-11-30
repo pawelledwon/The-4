@@ -2607,12 +2607,11 @@ MonoBehaviour:
   - {fileID: 2111572015}
   - {fileID: 710979975}
   - {fileID: 34437685}
-  padding: 2
-  cameraHeight: 6
-  distanceFromCharacters: 3.5
-  minFOV: 0
+  padding: 8
+  distanceFromCharacters: -15
   xCameraAngle: 30
-  yCameraAngle: -80
+  yCameraAngle: -85
+  transitionSpeed: 2
 --- !u!81 &432509197
 AudioListener:
   m_ObjectHideFlags: 0

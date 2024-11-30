@@ -12,8 +12,6 @@ public class CheckpointManager : MonoBehaviour
 
     private void Awake()
     {
-       
-
         if (Instance == null)
         {
             Instance = this;
@@ -27,6 +25,11 @@ public class CheckpointManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
+    }
+
+    public int GetCurrentCheckPointIndex()
+    {
+        return currentCheckpointIndex;
     }
 
     public void PlayerReachedCheckpoint(int checkpointIndex)
