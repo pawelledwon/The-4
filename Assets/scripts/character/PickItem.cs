@@ -216,6 +216,10 @@ public class PickUpObject : MonoBehaviour
             objectToPickUp.GetComponent<Rigidbody>().isKinematic = false;
             objectToPickUp.transform.parent = null;
             objectToPickUp.GetComponent<Collider>().enabled = true;
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(
+            objectToPickUp,
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene()
+        );
         }
 
         hasItem = false;
@@ -285,6 +289,10 @@ public class PickUpObject : MonoBehaviour
             hasItem = true;
             objectToPickUp.GetComponent<Rigidbody>().isKinematic = false;
             objectToPickUp.transform.parent = null;
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(
+            objectToPickUp,
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene()
+            );
 
             StartCoroutine(dragObject());
         }
