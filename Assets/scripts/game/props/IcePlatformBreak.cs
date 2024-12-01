@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class IcePlatformBreak : MonoBehaviour
@@ -61,11 +62,25 @@ public class IcePlatformBreak : MonoBehaviour
 
         // Simulate disappearance
         meshRenderer.enabled = false;
+        Collider platformCollider = GetComponent<Collider>();
+        platformCollider.enabled = false;
+        DeleteChildren();
+
         yield return new WaitForSeconds(resetDelay);
 
         // Re-enable platform and reset material
+        platformCollider.enabled = true;
         meshRenderer.enabled = true;
         meshRenderer.material = originalMaterial;
         isBlinking = false;
+    }
+
+    private void DeleteChildren()
+    {
+        foreach (Transform child in this.transform)
+        {
+            if (child.tag == "Player")
+                child.parent = null;
+        }
     }
 }

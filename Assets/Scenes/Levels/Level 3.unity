@@ -8365,6 +8365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asyncLoader: {fileID: 1166021498}
+  noSavedDataInfo: {fileID: 0}
 --- !u!114 &1166021498
 MonoBehaviour:
   m_ObjectHideFlags: 0
