@@ -62,6 +62,9 @@ public class InputHandler : MonoBehaviour
         {
             print("Move");
             playerController.SetMoveInput(context.ReadValue<Vector2>());
+        }else if (context.canceled)
+        {
+            playerController.SetMoveInput(Vector2.zero);
         }
     }
 

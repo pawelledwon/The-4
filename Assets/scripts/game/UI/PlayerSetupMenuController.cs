@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,10 +42,11 @@ public class PlayerSetupMenuController : MonoBehaviour
 
     public void SetPlayer(string characterName)
     {
-        if (!inputEnabled) 
+        if (!inputEnabled || IsCharacterAlreadyChosen(characterName)) 
         {
             return;
         }
+
 
         AssignCharacterToPlayer(characterName);
 
@@ -56,6 +58,15 @@ public class PlayerSetupMenuController : MonoBehaviour
     private void AssignCharacterToPlayer(string characterName)
     {
         PlayerConfigurationManager.instance.SetPlayer(playerIndex, characterName);
+    }
+
+    private bool IsCharacterAlreadyChosen(string characterName)
+    {
+        var playerConfigurations = PlayerConfigurationManager.instance.GetPlayerConfigurations();
+
+        bool isAlreadyChosen = playerConfigurations.Any(p => p.CharacterName.Equals(characterName));
+
+        return isAlreadyChosen;
     }
 
     public void ReadyPlayer()

@@ -59,13 +59,26 @@ public class PickUpObject : MonoBehaviour
     {
         checkForItemToPick();
 
-        if (pickUpPossible && !hasItem)
+        var pickedItemScript = objectToPickUp.GetComponent<PickedItem>();
+
+        if (pickUpPossible && !hasItem && pickedItemScript != null && !pickedItemScript.IsItemPicked(this.gameObject))
         {
+            if (pickedItemScript != null)
+            {
+                pickedItemScript.SetPlayer(this.gameObject);
+            }
+
             pickUpItem();
         }
 
-        if (!pickUpPossible || hasItem)
+        if (!pickUpPossible || hasItem || pickedItemScript == null || pickedItemScript.IsItemPicked(this.gameObject))
         {
+
+            if (pickedItemScript != null)
+            {
+                pickedItemScript.SetPlayer(null);
+            }
+
             dropItem();
         }
     }
@@ -79,7 +92,9 @@ public class PickUpObject : MonoBehaviour
             if (!hasItem)
             {
                 objectToPickUp = getObjectInSight();
+
                 decidePickUpOrDrag();
+                
             }
         }
         else
