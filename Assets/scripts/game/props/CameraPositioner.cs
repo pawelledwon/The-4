@@ -105,8 +105,8 @@ public class CameraPositioner : MonoBehaviour
         var characterRotation = characterTransform.rotation;
         var cameraRotation = cam.transform.rotation;
 
-        var leftLimit = cameraRotation * Quaternion.Euler(0, 150, 0);
-        var rightLimit = cameraRotation * Quaternion.Euler(0, -30,0);
+        var leftLimit = cameraRotation * Quaternion.Euler(0, 175, 0);
+        var rightLimit = cameraRotation * Quaternion.Euler(0, -5,0);
 
         Debug.Log($"lewo: {leftLimit.eulerAngles.y}, prawo: {rightLimit.eulerAngles.y}, postac: {characterRotation.eulerAngles.y}");
 

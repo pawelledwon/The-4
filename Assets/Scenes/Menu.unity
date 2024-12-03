@@ -203,7 +203,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34437684}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1.1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3689,7 +3689,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710979974}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1.05
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -10967,7 +10967,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611677081}
   serializedVersion: 4
-  m_Mass: 0.9
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -14325,7 +14325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5135609016246036449, guid: e2da728114677a24d9b4ceb86c831d4f, type: 3}
       propertyPath: m_MaxPlayerCount
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5135609016246036449, guid: e2da728114677a24d9b4ceb86c831d4f, type: 3}
       propertyPath: m_NotificationBehavior
@@ -14333,7 +14333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5388506319775219403, guid: e2da728114677a24d9b4ceb86c831d4f, type: 3}
       propertyPath: maxPlayers
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5388506319775219403, guid: e2da728114677a24d9b4ceb86c831d4f, type: 3}
       propertyPath: configurePlayersMenu

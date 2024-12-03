@@ -24,6 +24,7 @@ public class PlayerOnParkour : MonoBehaviour
         if (collision.gameObject.CompareTag("ParkourObject"))
         {
             transform.SetParent(originalParent);
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 }
