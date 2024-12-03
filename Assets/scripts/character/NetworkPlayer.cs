@@ -208,7 +208,7 @@ public class NetworkPlayer : MonoBehaviour
 
         Vector3 position;
         position.x = data.checkPointPosition[0];
-        position.y = data.checkPointPosition[1];
+        position.y = data.checkPointPosition[1] + 2;
         position.z = data.checkPointPosition[2];
 
         transform.position = position;

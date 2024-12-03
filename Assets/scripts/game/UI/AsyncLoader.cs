@@ -18,7 +18,7 @@ public class AsyncLoader : MonoBehaviour
     [SerializeField] 
     private Slider loadingSlider;
 
-    public void LoadLevelButton(string levelToLoad)
+    public void LoadLevelButton(string levelToLoad, bool loadCharacterPosition = true)
     {
         if (PlayerConfigurationManager.instance != null && PlayerConfigurationManager.instance.AllPlayersReady())
         {
@@ -31,7 +31,11 @@ public class AsyncLoader : MonoBehaviour
                     obj.SetActive(true);
                     obj.gameObject.GetComponent<NetworkPlayer>().enabled = true;
 
-                    obj.transform.position = new Vector3(0, 2, 0);
+                    if (loadCharacterPosition)
+                    {
+                        obj.transform.position = new Vector3(0, 2, 0);
+                    }
+
                     InitializePlayerInput(obj);
                 }
             }

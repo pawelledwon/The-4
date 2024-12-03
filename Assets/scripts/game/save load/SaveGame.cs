@@ -97,7 +97,7 @@ public class SaveGame : MonoBehaviour
 
         if (asyncLoader != null)
         {
-            asyncLoader.LoadLevelButton(levelName);
+            asyncLoader.LoadLevelButton(levelName, loadCharacterPosition: false);
         }
         else
         {
