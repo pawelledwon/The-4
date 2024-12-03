@@ -18,7 +18,9 @@ public class AsyncLoader : MonoBehaviour
     [SerializeField] 
     private Slider loadingSlider;
 
-    public void LoadLevelButton(string levelToLoad, bool loadCharacterPosition = true)
+    private bool loadCheckpoint;
+
+    public void LoadLevelButton(string levelToLoad)
     {
         if (PlayerConfigurationManager.instance != null && PlayerConfigurationManager.instance.AllPlayersReady())
         {
@@ -31,7 +33,7 @@ public class AsyncLoader : MonoBehaviour
                     obj.SetActive(true);
                     obj.gameObject.GetComponent<NetworkPlayer>().enabled = true;
 
-                    if (loadCharacterPosition)
+                    if (!loadCheckpoint)
                     {
                         obj.transform.position = new Vector3(0, 2, 0);
                     }
@@ -39,6 +41,8 @@ public class AsyncLoader : MonoBehaviour
                     InitializePlayerInput(obj);
                 }
             }
+
+            loadCheckpoint = false;
 
             currentScreen.SetActive(false);
             loadingScreen.SetActive(true);
@@ -89,5 +93,10 @@ public class AsyncLoader : MonoBehaviour
             loadingSlider.value = progressValue;
             yield return null;
         }
+    }
+
+    public void SetCheckpointToLoad(bool loadCheckpoint)
+    {
+        this.loadCheckpoint = loadCheckpoint;
     }
 }
