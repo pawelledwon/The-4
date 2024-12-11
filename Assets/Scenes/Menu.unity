@@ -14325,7 +14325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5135609016246036449, guid: e2da728114677a24d9b4ceb86c831d4f, type: 3}
       propertyPath: m_MaxPlayerCount
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5135609016246036449, guid: e2da728114677a24d9b4ceb86c831d4f, type: 3}
       propertyPath: m_NotificationBehavior
@@ -14333,7 +14333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5388506319775219403, guid: e2da728114677a24d9b4ceb86c831d4f, type: 3}
       propertyPath: maxPlayers
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5388506319775219403, guid: e2da728114677a24d9b4ceb86c831d4f, type: 3}
       propertyPath: configurePlayersMenu

@@ -96,8 +96,10 @@ public class PickUpObject : MonoBehaviour
             {
                 objectToPickUp = getObjectInSight();
 
-                decidePickUpOrDrag();
-                
+                if(objectToPickUp != null)
+                {
+                    decidePickUpOrDrag();
+                }
             }
         }
         else
@@ -150,6 +152,7 @@ public class PickUpObject : MonoBehaviour
 
     private void decidePickUpOrDrag()
     {
+
         Rigidbody objRb = objectToPickUp.GetComponent<Rigidbody>();
         Vector3 objSize = objectToPickUp.GetComponent<Collider>().bounds.size;
 
