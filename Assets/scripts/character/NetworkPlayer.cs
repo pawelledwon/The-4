@@ -90,7 +90,7 @@ public class NetworkPlayer : MonoBehaviour
             }
             else
             {
-                if (!cameraPositioner.IsFacingCamera(this.gameObject.transform))
+                if (!cameraPositioner.IsNotFacingCamera(this.gameObject.transform))
                 {
                     rigidBody.AddForce(-transform.right * inputMagnitued * 30);
                 }

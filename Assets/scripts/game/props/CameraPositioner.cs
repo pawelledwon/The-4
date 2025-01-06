@@ -100,7 +100,7 @@ public class CameraPositioner : MonoBehaviour
         return true;
     }
 
-    public bool IsFacingCamera(Transform characterTransform)
+    public bool IsNotFacingCamera(Transform characterTransform)
     {
         var characterRotation = characterTransform.rotation;
         var cameraRotation = cam.transform.rotation;

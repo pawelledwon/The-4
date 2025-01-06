@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class IcePlatformBreak : MonoBehaviour
 {
-    public float breakDelay = 3f; // Total time before the platform disappears
-    public float blinkDuration = 3f; // Duration for blinking effect
-    public float resetDelay = 2f; // Time before the platform reappears
+    public float breakDelay = 3f; 
+    public float blinkDuration = 3f;
+    public float resetDelay = 2f; 
 
     [SerializeField]
-    private Material originalMaterial; // Material for normal state
+    private Material originalMaterial;
     [SerializeField]
-    private Material blinkMaterial; // Material during blinking effect
+    private Material blinkMaterial;
 
     private MeshRenderer meshRenderer;
-    private bool isBlinking = false; // Track if blinking is active
-    private bool isUsingBlinkMaterial = false; // Flag to track current material
+    private bool isBlinking = false; 
+    private bool isUsingBlinkMaterial = false; 
 
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.material = originalMaterial; // Ensure the platform starts with the original material
+        meshRenderer.material = originalMaterial; 
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,9 +39,8 @@ public class IcePlatformBreak : MonoBehaviour
         // Start blinking effect
         while (elapsedTime < blinkDuration)
         {
-            float blinkInterval = Mathf.Lerp(0.5f, 0.05f, elapsedTime / blinkDuration); // Blinking frequency increases over time
+            float blinkInterval = Mathf.Lerp(0.5f, 0.05f, elapsedTime / blinkDuration); 
 
-            // Toggle material between original and blink materials using flag
             if (isUsingBlinkMaterial)
             {
                 meshRenderer.material = originalMaterial;
@@ -52,15 +51,13 @@ public class IcePlatformBreak : MonoBehaviour
             }
             isUsingBlinkMaterial = !isUsingBlinkMaterial;
 
-            yield return new WaitForSeconds(blinkInterval); // Wait for the interval
+            yield return new WaitForSeconds(blinkInterval);
             elapsedTime += blinkInterval;
         }
 
-        // Ensure the platform is back to its original material before disappearing
         meshRenderer.material = originalMaterial;
         yield return new WaitForSeconds(breakDelay - blinkDuration);
 
-        // Simulate disappearance
         meshRenderer.enabled = false;
         Collider platformCollider = GetComponent<Collider>();
         platformCollider.enabled = false;
@@ -68,7 +65,6 @@ public class IcePlatformBreak : MonoBehaviour
 
         yield return new WaitForSeconds(resetDelay);
 
-        // Re-enable platform and reset material
         platformCollider.enabled = true;
         meshRenderer.enabled = true;
         meshRenderer.material = originalMaterial;

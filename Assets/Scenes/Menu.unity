@@ -11556,6 +11556,7 @@ GameObject:
   - component: {fileID: 1690448840}
   - component: {fileID: 1690448841}
   - component: {fileID: 1690448842}
+  - component: {fileID: 1690448843}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -11717,6 +11718,18 @@ MonoBehaviour:
   m_Spacing: {x: 800, y: 400}
   m_Constraint: 1
   m_ConstraintCount: 2
+--- !u!114 &1690448843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690448834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d41fd8bbe3837e4aab533c4e1cbabdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1691994432 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4c0fd9c184f267e43a260d2f78072cfb, type: 3}
@@ -12578,9 +12591,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: Resume
+      - m_Target: {fileID: 1690448843}
+        m_TargetAssemblyTypeName: ExitGame, Assembly-CSharp
+        m_MethodName: DoExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

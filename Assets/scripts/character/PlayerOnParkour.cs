@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class PlayerOnParkour : MonoBehaviour
 {
-    private Transform originalParent;  
+    private Vector3 platformLastPosition;
+    private bool isOnPlatform = false;
+    private Transform currentPlatform; 
 
-    private void Start()
+    private void Update()
     {
-        originalParent = transform.parent;
+        if (isOnPlatform && currentPlatform != null)
+        {
+            Vector3 platformDelta = currentPlatform.position - platformLastPosition;
+
+            transform.position += platformDelta;
+
+            platformLastPosition = currentPlatform.position;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("ParkourObject"))
         {
-            transform.SetParent(collision.transform);
+            isOnPlatform = true;                         
+            currentPlatform = collision.transform;        
+            platformLastPosition = currentPlatform.position; 
         }
     }
 
@@ -23,8 +34,8 @@ public class PlayerOnParkour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ParkourObject"))
         {
-            transform.SetParent(originalParent);
-            DontDestroyOnLoad(this.gameObject);
+            isOnPlatform = false;     
+            currentPlatform = null;   
         }
     }
 }
