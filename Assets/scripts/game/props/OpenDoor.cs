@@ -5,9 +5,9 @@ using UnityEngine;
 public class OpenDoor : MonoBehaviour
 {
     [SerializeField]
-    private float newMass = 1f; // The mass to set when the door falls
+    private float newMass = 1f; 
     [SerializeField]
-    private float fallForce = 10f; // The force applied to make the door fall
+    private float fallForce = 10f;
     [SerializeField]
     private List<GameObject> buttons;
 
@@ -20,14 +20,12 @@ public class OpenDoor : MonoBehaviour
         doorRigidbody = GetComponent<Rigidbody>();
     }
 
-    // Call this function from each button when activated
     public void ButtonActivated()
     {
         activeButtons++;
         CheckDoorStatus();
     }
 
-    // Call this function from each button when deactivated
     public void ButtonDeactivated()
     {
         activeButtons--;

@@ -36,7 +36,6 @@ public class IcePlatformBreak : MonoBehaviour
         isBlinking = true;
         float elapsedTime = 0f;
 
-        // Start blinking effect
         while (elapsedTime < blinkDuration)
         {
             float blinkInterval = Mathf.Lerp(0.5f, 0.05f, elapsedTime / blinkDuration); 
