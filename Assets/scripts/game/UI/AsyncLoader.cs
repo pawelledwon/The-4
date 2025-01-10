@@ -35,6 +35,8 @@ public class AsyncLoader : MonoBehaviour
 
                     if (!loadCheckpoint)
                     {
+                        obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        obj.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                         obj.transform.position = new Vector3(0, 2, 0);
                     }
 
